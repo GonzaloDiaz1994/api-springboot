@@ -2,10 +2,7 @@ package com.example.firstappspring.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
@@ -17,6 +14,7 @@ public class Usuario {
     @Id
     @Setter(AccessLevel.NONE)
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nombre")
@@ -32,5 +30,16 @@ public class Usuario {
     @Column(name = "password")
     private String password;
     @Column(name = "nombre_usuario")
-    private String nombre_usuario;
+    private String nombreUsuario;
+
+    public Usuario(String nombre, String apellido, String telefono, String foto_perfil, String email, String password,
+                   String nombre_usuario) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.telefono = telefono;
+        this.fotoPerfil = foto_perfil;
+        this.email = email;
+        this.password = password;
+        this.nombreUsuario = nombre_usuario;
+    }
 }

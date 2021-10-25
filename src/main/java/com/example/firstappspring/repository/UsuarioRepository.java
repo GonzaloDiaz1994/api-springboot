@@ -1,12 +1,11 @@
 package com.example.firstappspring.repository;
 
 import com.example.firstappspring.model.Usuario;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 @Repository
 public class UsuarioRepository {
@@ -16,11 +15,12 @@ public class UsuarioRepository {
 
     @Transactional
     public String registrar(Usuario usuario){
-       if (!entityManager.contains(usuario)){
-            entityManager.persist(usuario);
-            return "usuario persistido";
-       }else {
-           return "usuario no persistido";
-       }
+        entityManager.persist(usuario);
+        return "usuario persistido";
+    }
+
+    @Transactional
+    public boolean usuarioOEmailRegitrado(String nombreUsuario, String email){
+        return entityManager.contains(nombreUsuario) || entityManager.contains(email);
     }
 }

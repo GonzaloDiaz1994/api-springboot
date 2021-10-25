@@ -1,5 +1,6 @@
 package com.example.firstappspring.service;
 
+import com.example.firstappspring.exception.UsuarioYaRegistrado;
 import com.example.firstappspring.model.Usuario;
 import com.example.firstappspring.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,13 @@ public class UsuarioService implements IUsuarioService{
     UsuarioRepository usuarioRepository;
 
     @Override
-    public String registrar(String nombre, String apellido, String telefono, String fotoPerfil, String email,
-                            String nombreUsuario, String password) {
-
-        return null;
+    public String registrar(Usuario usuario) throws UsuarioYaRegistrado {
+        if (usuarioRepository.usuarioOEmailRegitrado(usuario.getNombreUsuario(), usuario.getEmail())){
+            throw new UsuarioYaRegistrado();
+        }else{
+            usuarioRepository.registrar(usuario);
+            return "Registro exitoso";
+        }
     }
 
     @Override
