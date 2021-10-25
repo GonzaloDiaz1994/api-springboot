@@ -14,7 +14,7 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public String registrar(Usuario usuario) throws UsuarioYaRegistrado {
-        if (usuarioRepository.usuarioOEmailRegitrado(usuario.getNombreUsuario(), usuario.getEmail())){
+        if (usuarioRepository.existeElUsuario(usuario)){
             throw new UsuarioYaRegistrado();
         }else{
             usuarioRepository.registrar(usuario);

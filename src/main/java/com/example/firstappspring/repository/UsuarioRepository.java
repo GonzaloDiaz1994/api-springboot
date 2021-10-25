@@ -20,7 +20,27 @@ public class UsuarioRepository {
     }
 
     @Transactional
-    public boolean usuarioOEmailRegitrado(String nombreUsuario, String email){
-        return entityManager.contains(nombreUsuario) || entityManager.contains(email);
+    public boolean emailYaRegitrado(String email){
+        return entityManager.contains(email);
+    }
+
+    @Transactional
+    public boolean existeElUsuario(Usuario usuario){
+        return entityManager.contains(usuario);
+    }
+
+    @Transactional
+    public boolean nombreUsuarioYaRegistrado(String nombreUsuario){
+        return entityManager.contains(nombreUsuario);
+    }
+
+    @Transactional
+    public boolean telefonoYaRegistrado(String telefono){
+        return entityManager.contains(telefono);
+    }
+
+    public boolean datosYaRegistrados(Usuario usuario) {
+        return nombreUsuarioYaRegistrado(usuario.getNombreUsuario()) || emailYaRegitrado(usuario.getEmail()) ||
+                telefonoYaRegistrado(usuario.getTelefono());
     }
 }
