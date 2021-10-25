@@ -16,31 +16,13 @@ public class UsuarioRepository {
     @Transactional
     public String registrar(Usuario usuario){
         entityManager.persist(usuario);
-        return "usuario persistido";
+        return "Registro exitoso";
     }
 
     @Transactional
-    public boolean emailYaRegitrado(String email){
-        return entityManager.contains(email);
+    public void eliminarTodo(){
+        String query = "DELETE FROM Usuario ";
+        entityManager.createQuery(query).executeUpdate();
     }
 
-    @Transactional
-    public boolean existeElUsuario(Usuario usuario){
-        return entityManager.contains(usuario);
-    }
-
-    @Transactional
-    public boolean nombreUsuarioYaRegistrado(String nombreUsuario){
-        return entityManager.contains(nombreUsuario);
-    }
-
-    @Transactional
-    public boolean telefonoYaRegistrado(String telefono){
-        return entityManager.contains(telefono);
-    }
-
-    public boolean datosYaRegistrados(Usuario usuario) {
-        return nombreUsuarioYaRegistrado(usuario.getNombreUsuario()) || emailYaRegitrado(usuario.getEmail()) ||
-                telefonoYaRegistrado(usuario.getTelefono());
-    }
 }
