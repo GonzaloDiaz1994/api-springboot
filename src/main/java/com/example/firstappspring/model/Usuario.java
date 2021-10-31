@@ -13,33 +13,29 @@ public class Usuario {
 
     @Id
     @Setter(AccessLevel.NONE)
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false)
     private String nombre;
-    @Column(name = "apellido")
+    @Column(name = "apellido", nullable = false)
     private String apellido;
-    @Column(name = "telefono")
+    @Column(name = "telefono", unique = true, nullable = false)
     private String telefono;
     @Column(name = "foto_perfil")
     private String fotoPerfil;
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "nombre_usuario")
-    private String nombreUsuario;
 
-    public Usuario(String nombre, String apellido, String telefono, String foto_perfil, String email, String password,
-                   String nombre_usuario) {
+    public Usuario(String nombre, String apellido, String telefono, String foto_perfil, String email, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.fotoPerfil = foto_perfil;
         this.email = email;
         this.password = password;
-        this.nombreUsuario = nombre_usuario;
     }
 }

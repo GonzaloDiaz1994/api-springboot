@@ -1,28 +1,14 @@
 package com.example.firstappspring.repository;
 
 import com.example.firstappspring.model.Usuario;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-@Repository
-public class UsuarioRepository {
-
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    @Transactional
-    public String registrar(Usuario usuario){
-        entityManager.persist(usuario);
-        return "Registro exitoso";
-    }
-
-    @Transactional
-    public void eliminarTodo(){
-        String query = "DELETE FROM Usuario ";
-        entityManager.createQuery(query).executeUpdate();
-    }
+    Usuario findByEmail(String email);
+    Boolean existsByEmail(String email);
+    Boolean existsByTelefono(String telefono);
+    Usuario deleteUsuarioByEmail(String email);
+    Usuario findUsuarioByEmailAndPassword(String email, String password);
 
 }

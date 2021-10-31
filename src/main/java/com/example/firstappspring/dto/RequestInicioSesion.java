@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class RequestInicioSesion {
 
-    private String nombreUsuario_email;
+    private String email;
     private String password;
 
 }
