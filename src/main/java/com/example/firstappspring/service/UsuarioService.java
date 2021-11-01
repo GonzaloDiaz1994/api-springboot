@@ -4,16 +4,17 @@ import com.example.firstappspring.dto.RequestInicioSesion;
 import com.example.firstappspring.dto.ResponseUsuario;
 import com.example.firstappspring.model.Usuario;
 import com.example.firstappspring.repository.UsuarioRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Objects;
 
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioService implements IUsuarioService{
 
     @Autowired

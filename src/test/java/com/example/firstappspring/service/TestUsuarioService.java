@@ -6,7 +6,6 @@ import lombok.val;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataIntegrityViolationException;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -16,7 +15,6 @@ public class TestUsuarioService {
     private UsuarioService usuarioService;
     private Usuario usuario1;
     private Usuario usuario2;
-    private Usuario usuario3;
 
     @BeforeAll
     void setUp(){
@@ -24,8 +22,6 @@ public class TestUsuarioService {
                 "akira@gmail.com", "456");
         usuario2 = new Usuario("Apolo", "Diaz", "1166788749", "",
                 "apolo@gmail.com", "456");
-        usuario3 = new Usuario("Titan", "Villaba", "1165655335", "",
-                "titan@gmail.com", "456");
     }
 
     @BeforeEach
@@ -72,9 +68,11 @@ public class TestUsuarioService {
 
     @Test
     public void iniciarSesion(){
-        usuarioService.registrar(usuario1);
-        val request = new RequestInicioSesion("akira@gmail.com", "456");
+        Usuario usuario3 = new Usuario("Titan", "Villaba", "1165655335", "",
+                "titan@gmail.com", "890");
+        usuarioService.registrar(usuario3);
+        val request = new RequestInicioSesion("titan@gmail.com", "890");
         val response = usuarioService.iniciarSesion(request);
-        Assertions.assertEquals("Akira", response.getNombre());
+        Assertions.assertEquals("Titan", response.getNombre());
     }
 }
