@@ -1,26 +1,14 @@
 package com.example.firstappspring.repository;
 
 import com.example.firstappspring.model.Usuario;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-@Repository
-public class UsuarioRepository {
+    Usuario findByEmail(String email);
+    Boolean existsByEmail(String email);
+    Boolean existsByTelefono(String telefono);
+    Usuario deleteUsuarioByEmail(String email);
+    Usuario findUsuarioByEmailAndPassword(String email, String password);
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    @Transactional
-    public String registrar(Usuario usuario){
-       if (!entityManager.contains(usuario)){
-            entityManager.persist(usuario);
-            return "usuario persistido";
-       }else {
-           return "usuario no persistido";
-       }
-    }
 }
