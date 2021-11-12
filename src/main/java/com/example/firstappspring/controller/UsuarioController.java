@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 @RestController
@@ -19,6 +22,11 @@ public class UsuarioController {
 
     @Autowired
     UsuarioService usuarioService;
+
+    @GetMapping("/usuarios")
+    public ResponseEntity<List<Usuario>> todosLosUsuarios(){
+        return new ResponseEntity(usuarioService.todosLosUsuarios(), HttpStatus.OK);
+    }
 
     @PostMapping("/registrar")
     public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario){
@@ -39,5 +47,4 @@ public class UsuarioController {
         }
     }
 
-    // si no va a retornar nada el response entiyi, en vez de body se puede agregar .build()
 }
