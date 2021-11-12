@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 
 @Service
@@ -48,16 +49,6 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public String borrarUsuarioPorEmail(String email) {
-        if (usuarioRepository.existsByEmail(email)){
-            usuarioRepository.deleteUsuarioByEmail(email);
-            return "Usuario "+email+" eliminado";
-        }else {
-            return "Usuario "+email+" no encontrado";
-        }
-    }
-
-    @Override
     public ResponseUsuario iniciarSesion(RequestInicioSesion requestInicioSesion) {
         try{
             val pass = toHash("ayi#"+requestInicioSesion.getPassword());
@@ -70,6 +61,11 @@ public class UsuarioService implements IUsuarioService{
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public List<Usuario> todosLosUsuarios() {
+        return usuarioRepository.findAll();
     }
 
     @Override
